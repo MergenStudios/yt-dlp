@@ -741,7 +741,7 @@ class FFmpegMetadataPP(FFmpegPostProcessor):
                 info[key] for key in [f'{meta_prefix}_', *variadic(info_list or meta_list)]
                 if info.get(key) is not None), None)
             if value not in ('', None):
-                value = '/'.join(map(str, variadic(value)))
+                value = r'||'.join(map(str, variadic(value)))
                 value = value.replace('\0', '')  # nul character cannot be passed in command line
                 metadata['common'].update(dict.fromkeys(variadic(meta_list), value))
 
