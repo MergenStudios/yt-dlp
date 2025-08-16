@@ -1696,6 +1696,13 @@ def create_parser():
             'Embed metadata to the video file. Also embeds chapters/infojson if present '
             'unless --no-embed-chapters/--no-embed-info-json are used (Alias: --add-metadata)'))
     postproc.add_option(
+        '--metadata-seperator',
+        action='store', dest='seperator', default="/",
+        help=(
+            'Seperator to be used while adding multi-valued fields to the metadata (e.g. Artists)'
+        )
+    )
+    postproc.add_option(
         '--no-embed-metadata', '--no-add-metadata',
         action='store_false', dest='addmetadata',
         help='Do not add metadata to file (default) (Alias: --no-add-metadata)')

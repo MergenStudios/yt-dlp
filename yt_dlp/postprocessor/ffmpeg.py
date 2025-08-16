@@ -668,9 +668,12 @@ class FFmpegEmbedSubtitlePP(FFmpegPostProcessor):
 
 class FFmpegMetadataPP(FFmpegPostProcessor):
 
-    def __init__(self, downloader, add_metadata=True, add_chapters=True, add_infojson='if_exists'):
+    def __init__(self, downloader, add_metadata=True, seperator="|", add_chapters=True, add_infojson='if_exists'):
         FFmpegPostProcessor.__init__(self, downloader)
+
+        print(f"seperator: {seperator}")
         self._add_metadata = add_metadata
+        self._seperator = seperator
         self._add_chapters = add_chapters
         self._add_infojson = add_infojson
 
@@ -741,7 +744,7 @@ class FFmpegMetadataPP(FFmpegPostProcessor):
                 info[key] for key in [f'{meta_prefix}_', *variadic(info_list or meta_list)]
                 if info.get(key) is not None), None)
             if value not in ('', None):
-                value = r'||'.join(map(str, variadic(value)))
+                value = self._seperator.join(map(str, variadic(value)))
                 value = value.replace('\0', '')  # nul character cannot be passed in command line
                 metadata['common'].update(dict.fromkeys(variadic(meta_list), value))
 

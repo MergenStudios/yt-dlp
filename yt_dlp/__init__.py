@@ -701,6 +701,7 @@ def get_postprocessors(opts):
         yield {
             'key': 'FFmpegMetadata',
             'add_chapters': opts.addchapters,
+            'seperator': opts.seperator,
             'add_metadata': opts.addmetadata,
             'add_infojson': opts.embed_infojson,
         }
